@@ -29,12 +29,11 @@ class Params(dict):
             if not math.isclose(v, other.get(p, math.nan), abs_tol=self.ABS_TOL):
                 diff[p] = v
         if diff:
-            print(f"   {self.name:>{diff.longest_p_len()+diff.longest_v_len()}} | "
-                  f"{other.name}")
+            print(f"{self.name:>{diff.longest_p_len() + len(" = ") + diff.longest_v_len()}}"
+                  f" | {other.name}")
         for p, v in diff.items():
-            print(f"{p:<{diff.longest_p_len()}} = "
-                  f"{str_value(self[p]):<{self.longest_v_len()}} | "
-                  f"{str_value(other.get(p), "")}")
+            print(f"{p:<{diff.longest_p_len()}} = {str_value(self[p]):<{self.longest_v_len()}}"
+                  f" | {str_value(other.get(p), "")}")
 def test_Params():
     p = Params("local")
     p["a"] = 1
